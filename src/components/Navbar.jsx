@@ -19,7 +19,7 @@ const Navbar = () => {
         <Links>
           <StyledLink to="/">Home</StyledLink>
           <StyledLink to="/addItems">Add Item</StyledLink>
-          <StyledLink to="/user">Profile</StyledLink>
+          <StyledLink to="PofilePage">Profile</StyledLink>
           <StyledLink to="/cart">Your Cart</StyledLink>
         </Links>
       </Menu>
@@ -45,18 +45,21 @@ const NavBar = styled.div`
 
 const Pcontainer = styled.div`
   display: flex;
-  margin-left: 47.5%;
+  margin-left: 48%;
   flex-direction: column;
   font-size: 20px;
   font-weight: bold;
+  @media (max-width: 950px) {
+    margin-left: 50%;
+  }
   @media (max-width: 780px) {
-    margin-left: 25%;
+    margin-left: 5%;
   }
   @media (max-width: 680px) {
-    margin-left: 2%;
+    margin-left: 5%;
   }
   @media (max-width: 480px) {
-    margin-left: 42%;
+    margin-left: 5%;
   }
 `;
 

@@ -50,7 +50,7 @@ const Pcontainer = styled.div`
   font-size: 20px;
   font-weight: bold;
   @media (max-width: 950px) {
-    margin-left: 50%;
+    margin-left: 47%;
   }
   @media (max-width: 780px) {
     margin-left: 5%;

@@ -1,40 +1,51 @@
-//import react from "react";
-import styled from "styled-components"
-const Home = () =>{
+import styled from "styled-components";
 
-
-return(
+const Home = () => {
+  return (
     <HomeDiv>
-    <SearchDiv>
-        <Search></Search>
-        <Search2></Search2>
-    </SearchDiv>
+      <SearchDiv>
+        <Search2 placeholder="Search categories" />
+      </SearchDiv>
+      <MiddleSearchDiv>
+        <Search placeholder="Search items" />
+      </MiddleSearchDiv>
     </HomeDiv>
-)
-}
+  );
+};
 
+export default Home;
 
-export default Home
-
-const Search = styled.button`
-  height: 30px;
-  border-radius: 9999px;
-  width: 200px;
-  margin-right: 10px; /* Add some space between the two elements */
-`;
-const SearchDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 const HomeDiv = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+`;
+
+const SearchDiv = styled.div`
+  position: absolute;
+  top: 100px; /* Assuming navbar height is 80px */
+  left: 20px;
+`;
+
+const MiddleSearchDiv = styled.div`
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Optional: makes the div take up the full viewport height */
+  margin-top: 100px; /* Assuming navbar height is 80px */
 `;
-const Search2 = styled.div`
-  height: 30px;
+
+const Search = styled.input`
+  height: 16px;
   border-radius: 9999px;
-  width: 200px;
+  width: 220px;
+  padding: 10px;
+`;
+
+const Search2 = styled.input`
+  height: 9px;
+  border-radius: 9999px;
+  width: 140px;
+  padding: 10px;
 `;

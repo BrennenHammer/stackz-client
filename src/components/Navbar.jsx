@@ -19,7 +19,7 @@ const Navbar = () => {
         <Links>
           <StyledLink to="/">Home</StyledLink>
           <StyledLink to="/addItems">Add Item</StyledLink>
-          <StyledLink to="PofilePage">Profile</StyledLink>
+          <StyledLink to="ProfilePage">Profile</StyledLink>
           <StyledLink to="/cart">Your Cart</StyledLink>
         </Links>
       </Menu>

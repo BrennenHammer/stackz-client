@@ -121,7 +121,7 @@ const VerticalLine = styled.div`
 `;
 
 const MiddleSearchDiv = styled.div`
-  padding: 20px;
+  padding: 19px;
   margin-left: 25%;
   flex-grow: 1;
   @media (max-width: 750px){

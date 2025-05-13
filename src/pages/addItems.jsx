@@ -1,17 +1,37 @@
 import styled from "styled-components";
 import { useState } from "react";
+import axios from "axios";
 
 const AddItemPage = () => {
-  const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
+  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState('');
+  const [seller, setSeller] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const item = { name, price, description, image };
-    console.log(item);
-    // Add logic to save the item to your database or state
+    const formData = new FormData();
+    formData.append('title', title);
+  formData.append('price', price);
+  formData.append('category', category);
+  formData.append('seller', seller);
+  formData.append('description', description);
+  formData.append('image', image);
+
+    axios.post('/api/items', formData)
+    .then((response) => {
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error('Error:', error.response.data);
+      console.error('Status:', error.response.status);
+    });
+  };
+
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
   };
 
   return (
@@ -19,8 +39,8 @@ const AddItemPage = () => {
       <h1>Add Item</h1>
       <Form onSubmit={handleSubmit}>
         <InputGroup>
-          <Label>Name:</Label>
-          <Input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          <Label>Title:</Label>
+          <Input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
         </InputGroup>
         <InputGroup>
           <Label>Price:</Label>
@@ -31,8 +51,28 @@ const AddItemPage = () => {
           <Textarea value={description} onChange={(e) => setDescription(e.target.value)} />
         </InputGroup>
         <InputGroup>
-          <Label>Image URL:</Label>
-          <Input type="text" value={image} onChange={(e) => setImage(e.target.value)} />
+          <Label>Image:</Label>
+          <Input type="file" onChange={handleImageChange} />
+        </InputGroup>
+        <InputGroup>
+          <Label>Category:</Label>
+          <select value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="">Select a category</option>
+            <option value="Electronics">Electronics</option>
+            <option value="Fashion">Fashion</option>
+            <option value="Home">Home</option>
+            <option value="Sports">Sports</option>
+            <option value="Toys">Toys</option>
+            <option value="Books">Books</option>
+            <option value="Music">Music</option>
+            <option value="Decoration">Decoration</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Art">Art</option>
+          </select>
+        </InputGroup>
+        <InputGroup>
+          <Label>Seller:</Label>
+          <Input type="text" value={seller} onChange={(e) => setSeller(e.target.value)} />
         </InputGroup>
         <Button type="submit">Add Item</Button>
       </Form>

@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Item from "../components/Item";
 
 const Home = () => {
   const [tags, setTags] = useState([
@@ -16,14 +18,32 @@ const Home = () => {
   ]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showMore, setShowMore] = useState(false);
+  const [items, setItems] = useState([]);
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
+  useEffect(() => {
+    axios.get('/api/items')
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   const filteredTags = tags.filter((tag) =>
     tag.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const categorizedItems = tags.map((tag) => {
+    return {
+      tag,
+      items: items.filter((item) => item.category === tag),
+    };
+  }).filter(category => category.items.length > 0);
 
   return (
     <HomeDiv>
@@ -51,7 +71,14 @@ const Home = () => {
       <VerticalLine />
       <MiddleSearchDiv>
         <Search placeholder="Search items" />
-        {/* Items will go here */}
+        {categorizedItems.map((category) => (
+          <div key={category.tag}>
+            <h2>{category.tag}</h2>
+            {category.items.map((item) => (
+              <Item key={item._id} name={item.name} price={item.price} description={item.description} image={item.image} />
+            ))}
+          </div>
+        ))}
       </MiddleSearchDiv>
     </HomeDiv>
   );

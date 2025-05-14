@@ -1,9 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkAuth = () => {
+      const token = localStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    };
+
+    checkAuth(); // Run on mount
+    window.addEventListener('storage', checkAuth); // Listen for login event
+
+    return () => window.removeEventListener('storage', checkAuth); // Cleanup
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+  };
 
   return (
     <NavBar>
@@ -17,10 +35,21 @@ const Navbar = () => {
       <Hamburger onClick={() => setMenuOpen(!menuOpen)}>&#9776;</Hamburger>
       <Menu open={menuOpen}>
         <Links>
-          <StyledLink to="/">Home</StyledLink>
-          <StyledLink to="/addItems">Add Item</StyledLink>
-          <StyledLink to="ProfilePage">Profile</StyledLink>
-          <StyledLink to="/cart">Your Cart</StyledLink>
+          {isLoggedIn ? (
+            <>
+              <StyledLink to="/">Home</StyledLink>
+              <StyledLink to="/addItems">Add Item</StyledLink>
+              <StyledLink to="/profilepage">Profile</StyledLink>
+              <StyledLink to="/cart">Your Cart</StyledLink>
+              <StyledLink onClick={handleLogout} to="#">Logout</StyledLink>
+            </>
+          ) : (
+            <>
+              <StyledLink to="/login">Login</StyledLink>
+              <StyledLink to="/signup">Sign Up</StyledLink>
+              <StyledLink to="/cart">Your Cart</StyledLink>
+            </>
+          )}
         </Links>
       </Menu>
     </NavBar>
@@ -63,29 +92,11 @@ const Pcontainer = styled.div`
   }
 `;
 
-const P1 = styled.p`
-  margin: 0px;
-`;
-
-const P2 = styled.p`
-  margin: -13px;
-  opacity: 70%;
-`;
-
-const P3 = styled.p`
-  margin: -0px;
-  opacity: 50%;
-`;
-
-const P4 = styled.p`
-  margin: -13px;
-  opacity: 30%;
-`;
-
-const P5 = styled.p`
-  margin: -0px;
-  opacity: 10%;
-`;
+const P1 = styled.p` margin: 0px; `;
+const P2 = styled.p` margin: -13px; opacity: 70%; `;
+const P3 = styled.p` margin: -0px; opacity: 50%; `;
+const P4 = styled.p` margin: -13px; opacity: 30%; `;
+const P5 = styled.p` margin: -0px; opacity: 10%; `;
 
 const Hamburger = styled.div`
   display: none;

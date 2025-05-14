@@ -3,8 +3,8 @@ import styled from "styled-components";
 const Item = ({ name, price, description, image }) => {
   return (
     <ItemContainer>
-      <ItemImage src={image} alt={name} />
-      <ItemDetails>
+<ItemImage src={`/uploads/${image}`} alt={name} />
+<ItemDetails>
         <ItemName>{name}</ItemName>
         <ItemPrice>${price}</ItemPrice>
         <ItemDescription>{description}</ItemDescription>
@@ -26,7 +26,7 @@ const ItemImage = styled.img`
   width: 100%;
   height: 150px;
   object-fit: cover;
-  border-radius: 10px 10px 0 0;
+  border-radius: 10px 10px 5px 5px;
 `;
 
 const ItemDetails = styled.div`
@@ -41,13 +41,13 @@ const ItemName = styled.h2`
 
 const ItemPrice = styled.p`
   font-size: 16px;
-  color: #666;
+  color: black;
   margin-bottom: 10px;
 `;
 
 const ItemDescription = styled.p`
   font-size: 14px;
-  color: #999;
+  color: black;
 `;
 
 export default Item;

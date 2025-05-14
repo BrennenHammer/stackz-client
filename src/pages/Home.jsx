@@ -75,7 +75,14 @@ const Home = () => {
           <div key={category.tag}>
             <h2>{category.tag}</h2>
             {category.items.map((item) => (
-              <Item key={item._id} name={item.name} price={item.price} description={item.description} image={item.image} />
+              <Item
+              key={item._id}
+              name={item.name}
+              price={item.price}
+              description={item.description}
+              image={item.image}
+            />
+            
             ))}
           </div>
         ))}

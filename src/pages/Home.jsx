@@ -2,10 +2,14 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Item from "../components/Item";
-import ItemGrid from "../components/ItemGrid";
+import ItemGrid from "../components/ItemGrid"; // Make sure this is correct
 
 const Home = () => {
-  const [tags, setTags] = useState([
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showMore, setShowMore] = useState(false);
+  const [items, setItems] = useState([]);
+
+  const tags = [
     "Electronics",
     "Fashion",
     "Home",
@@ -16,17 +20,10 @@ const Home = () => {
     "Decoration",
     "Clothing",
     "Art",
-  ]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [showMore, setShowMore] = useState(false);
-  const [items, setItems] = useState([]);
-
-  const handleSearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  ];
 
   useEffect(() => {
-    axios.get('/api/items')
+    axios.get("/api/items")
       .then((response) => {
         setItems(response.data);
       })
@@ -35,16 +32,13 @@ const Home = () => {
       });
   }, []);
 
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
   const filteredTags = tags.filter((tag) =>
     tag.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const categorizedItems = tags.map((tag) => {
-    return {
-      tag,
-      items: items.filter((item) => item.category === tag),
-    };
-  }).filter(category => category.items.length > 0);
 
   return (
     <HomeDiv>
@@ -69,14 +63,14 @@ const Home = () => {
             ))}
         </CategoryContainer>
       </LeftPanel>
+
       <VerticalLine />
+
       <MiddleSearchDiv>
-        <Search placeholder="Search items" />
-        {categorizedItems.map((category) => (
-  <div key={category.tag}>
-    <h2>{category.tag}</h2>
+  <ContentWrapper>
+    <Search placeholder="Search items" />
     <ItemGrid>
-      {category.items.map((item) => (
+      {items.map((item) => (
         <Item
           key={item._id}
           name={item.name}
@@ -86,11 +80,9 @@ const Home = () => {
         />
       ))}
     </ItemGrid>
-  </div>
-))}
+  </ContentWrapper>
+</MiddleSearchDiv>
 
-
-      </MiddleSearchDiv>
     </HomeDiv>
   );
 };
@@ -122,12 +114,16 @@ const Search2 = styled.input`
   width: 140px;
   padding: 10px;
   margin-bottom: 10px;
+  @media (max-width: 750px) {
+    width: 40%;
+    font-size: 80%;
+  }
 `;
 
 const CategoryContainer = styled.div`
   width: 150px;
-  @media (max-width: 750px){
-  width: 60%;
+  @media (max-width: 750px) {
+    width: 65%;
   }
 `;
 
@@ -153,18 +149,22 @@ const VerticalLine = styled.div`
   border-left: 1px solid #ddd;
   height: 100vh;
   margin-left: -40px;
-  @media (max-width: 750px){
-  margin-left: -50px;
+  @media (max-width: 750px) {
+    margin-left: -50px;
   }
 `;
 
 const MiddleSearchDiv = styled.div`
-  padding: 19px;
-  margin-left: 25%;
+  padding: 20px;
   flex-grow: 1;
-  @media (max-width: 750px){
-  margin-left: 2.5%;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
+const ContentWrapper = styled.div`
+  width: 100%;
+  max-width: 1000px;
+`;
+
 
 export default Home;

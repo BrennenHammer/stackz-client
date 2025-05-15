@@ -110,13 +110,18 @@ const Search = styled.input`
 
 const Search2 = styled.input`
   height: 9px;
-  border-radius: 9999px;
   width: 140px;
+  border: none;
   padding: 10px;
   margin-bottom: 10px;
   @media (max-width: 750px) {
-    width: 40%;
+    width: 54.5%;
     font-size: 80%;
+  }
+     @media (max-width: 500px) {
+    width: 70%;
+    font-size: 70%;
+    margin-left: -10px;
   }
 `;
 

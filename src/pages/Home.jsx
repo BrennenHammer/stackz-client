@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Item from "../components/Item";
+import ItemGrid from "../components/ItemGrid";
 
 const Home = () => {
   const [tags, setTags] = useState([
@@ -72,20 +73,23 @@ const Home = () => {
       <MiddleSearchDiv>
         <Search placeholder="Search items" />
         {categorizedItems.map((category) => (
-          <div key={category.tag}>
-            <h2>{category.tag}</h2>
-            {category.items.map((item) => (
-              <Item
-              key={item._id}
-              name={item.name}
-              price={item.price}
-              description={item.description}
-              image={item.image}
-            />
-            
-            ))}
-          </div>
-        ))}
+  <div key={category.tag}>
+    <h2>{category.tag}</h2>
+    <ItemGrid>
+      {category.items.map((item) => (
+        <Item
+          key={item._id}
+          name={item.name}
+          price={item.price}
+          description={item.description}
+          image={item.image}
+        />
+      ))}
+    </ItemGrid>
+  </div>
+))}
+
+
       </MiddleSearchDiv>
     </HomeDiv>
   );

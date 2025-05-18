@@ -1,22 +1,23 @@
-// ProfilePage.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
-
-
-const ProfilePage = ({ userId }) => {
+const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/profile/${userId}`)
-      .then(response => {
-        setProfile(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching profile:', error);
-      });
-  }, [userId]);
+    axios.get('http://localhost:5000/api/profile', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    .then(response => {
+      setProfile(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching profile:', error);
+    });
+  }, []);
 
   if (!profile) {
     return <div>Loading...</div>;
@@ -38,6 +39,7 @@ const ProfilePage = ({ userId }) => {
 };
 
 export default ProfilePage;
+
 const ProfileContainer = styled.div`
   width: 100%;
   max-width: 800px;

@@ -26,11 +26,11 @@ const Navbar = () => {
   return (
     <NavBar>
       <Pcontainer>
-        <P1>Stackz</P1>
-        <P2>Stackz</P2>
-        <P3>Stackz</P3>
-        <P4>Stackz</P4>
-        <P5>Stackz</P5>
+      <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P1>Stackz</P1></Link>
+  <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P2>Stackz</P2></Link>
+  <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P3>Stackz</P3></Link>
+  <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P4>Stackz</P4></Link>
+  <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P5>Stackz</P5></Link>
       </Pcontainer>
       <Hamburger onClick={() => setMenuOpen(!menuOpen)}>&#9776;</Hamburger>
       <Menu open={menuOpen}>
@@ -45,6 +45,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
+              <StyledLink to="/">Home</StyledLink>
               <StyledLink to="/login">Login</StyledLink>
               <StyledLink to="/signup">Sign Up</StyledLink>
               <StyledLink to="/cart">Your Cart</StyledLink>

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const AddItemPage = () => {
   const [price, setPrice] = useState("");
@@ -11,7 +12,8 @@ const AddItemPage = () => {
   const [title, setTitle] = useState('');
   const [seller, setSeller] = useState('');
   const [preview, setPreview] = useState(null);
-
+  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -38,10 +40,22 @@ const AddItemPage = () => {
     axios.post('/api/items', formData)
       .then((response) => {
         console.log(response.data);
+        setMessage("Item Posted!");
+        setTitle("");
+        setPrice("");
+        setDescription("");
+        setCategory("");
+        setImage(null);
+        setPreview(null);
+        setTimeout(() => {
+          setMessage(""); // clear message before redirect if desired
+          navigate("/");
+        }, 1500);
       })
       .catch((error) => {
         console.error('Error:', error.response?.data || error.message);
         console.error('Status:', error.response?.status);
+        setMessage("Item Failed to Post.");
       });
   };
 
@@ -60,6 +74,11 @@ const AddItemPage = () => {
   return (
     <AddItemContainer>
       <h1>Add Item</h1>
+      {message && (
+  <Message isSuccess={message === "Item Posted!"}>
+    {message}
+  </Message>
+)}
       <Form onSubmit={handleSubmit}>
         <InputGroup>
           <Label>Title:</Label>
@@ -93,6 +112,7 @@ const AddItemPage = () => {
             <option value="Sports">Sports</option>
             <option value="Toys">Toys</option>
             <option value="Books">Books</option>
+            <option value="tools">Tools</option>
             <option value="Music">Music</option>
             <option value="Decoration">Decoration</option>
             <option value="Clothing">Clothing</option>
@@ -154,5 +174,11 @@ const Button = styled.button`
   border-radius: 5px;
   cursor: pointer;
 `;
+const Message = styled.p`
+  color: ${({ isSuccess }) => (isSuccess ? "green" : "red")};
+  font-weight: bold;
+  margin-bottom: 20px;
+`;
 
 export default AddItemPage;
+

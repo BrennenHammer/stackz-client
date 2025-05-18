@@ -14,6 +14,7 @@ const Home = () => {
     "Fashion",
     "Home",
     "Sports",
+    "tools",
     "Toys",
     "Books",
     "Music",

@@ -28,6 +28,9 @@ const ItemImage = styled.img`
   height: 150px;
   object-fit: cover;
   border-radius: 10px 10px 5px 5px;
+  &:hover {
+  transform: scale(1.10);
+  }
 `;
 
 const ItemDetails = styled.div`

@@ -16,7 +16,8 @@ const LoginPage = () => {
         email,
         password
       });
-
+      console.log('Response:', response); // Log the response object
+      console.log('Token:', response.data.token);
       // Save the token in localStorage
       localStorage.setItem('token', response.data.token);
 

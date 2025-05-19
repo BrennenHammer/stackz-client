@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 import styled from 'styled-components';
 
 const ProfilePage = () => {
   const [profile, setProfile] = useState(null);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/profile', {
+    api.get('/profile', {
       headers: {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       }

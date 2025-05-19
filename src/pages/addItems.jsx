@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import api from '../api';
 
 const AddItemPage = () => {
   const [price, setPrice] = useState("");
@@ -37,7 +37,7 @@ const AddItemPage = () => {
     formData.append('description', description);
     formData.append('image', image);
 
-    axios.post('/api/items', formData)
+    api.post('/items', formData)
       .then((response) => {
         console.log(response.data);
         setMessage("Item Posted!");

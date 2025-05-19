@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Item from "../components/Item";
 import ItemGrid from "../components/ItemGrid"; // Make sure this is correct
+import api from '../api';
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,7 +24,7 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    axios.get("/api/items")
+    api.get("/items")
       .then((response) => {
         setItems(response.data);
       })

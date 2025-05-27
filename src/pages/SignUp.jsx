@@ -21,7 +21,6 @@ const Signup = () => {
     try {
       await api.post("/users", formData);
       setMessage("Signup successful!");
-      // Redirect to login page
       navigate("/login");
     } catch (err) {
       console.error(err);

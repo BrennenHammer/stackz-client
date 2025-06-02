@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Item = ({ name, price, description, image }) => {
   return (
     <ItemContainer>
-<ItemImage src={`/uploads/${image}`} alt={name} />
+<ItemImage src={`https://stackz-server.onrender.com/uploads/${image}`} alt={name} />
 <ItemDetails>
         <ItemName>{name}</ItemName>
         <ItemPrice>${price}</ItemPrice>

@@ -25,7 +25,7 @@ const ItemContainer = styled.div`
 
 const ItemImage = styled.img`
   width: 100%;
-  height: 150px;
+  height: 190px;
   object-fit: cover;
   border-radius: 10px 10px 5px 5px;
   &:hover {

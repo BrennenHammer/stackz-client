@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Item = ({ name, price, description, image }) => {
+const Item = ({ name, price, description, image, onAddToCart }) => {
   return (
     <ItemContainer>
 <ItemImage src={`https://stackz-server.onrender.com/uploads/${image}`} alt={name} />
@@ -8,6 +8,8 @@ const Item = ({ name, price, description, image }) => {
         <ItemName>{name}</ItemName>
         <ItemPrice>${price}</ItemPrice>
         <ItemDescription>{description}</ItemDescription>
+        <AddToCartButton onClick={onAddToCart}>🛒</AddToCartButton>
+
       </ItemDetails>
     </ItemContainer>
   );
@@ -34,24 +36,39 @@ const ItemImage = styled.img`
 `;
 
 const ItemDetails = styled.div`
-  padding: 10px;
+  padding: 0px;
 `;
 
 const ItemName = styled.h2`
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: -5px;
 `;
 
 const ItemPrice = styled.p`
   font-size: 16px;
   color: black;
-  margin-bottom: 10px;
+  margin-bottom: -5px;
 `;
 
 const ItemDescription = styled.p`
   font-size: 14px;
   color: black;
+`;
+
+const AddToCartButton = styled.button`
+  margin-top: 3px;
+  font-size: 20px;
+  color: white;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  height: 35px;
+  width: 35px;
+  margin-left: 80%;
+  cursor: pointer;
+  &:hover {
+    background-color:rgb(54, 56, 58);
+  }
 `;
 
 export default Item;

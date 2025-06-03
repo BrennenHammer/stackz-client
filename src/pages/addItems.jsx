@@ -75,7 +75,7 @@ const AddItemPage = () => {
     <AddItemContainer>
       <h1>Add Item</h1>
       {message && (
-  <Message isSuccess={message === "Item Posted!"}>
+  <Message $isSuccess={message === "Item Posted!"}>
     {message}
   </Message>
 )}
@@ -175,7 +175,7 @@ const Button = styled.button`
   cursor: pointer;
 `;
 const Message = styled.p`
-  color: ${({ isSuccess }) => (isSuccess ? "green" : "red")};
+  color: ${({ $isSuccess }) => ($isSuccess ? "green" : "red")};
   font-weight: bold;
   margin-bottom: 20px;
 `;

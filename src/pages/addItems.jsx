@@ -73,7 +73,6 @@ const AddItemPage = () => {
 
   return (
     <AddItemContainer>
-      <h1>Add Item</h1>
       {message && (
   <Message $isSuccess={message === "Item Posted!"}>
     {message}

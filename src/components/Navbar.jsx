@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Navbar = () => {
+const Navbar = ({ cartCount }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -26,11 +26,11 @@ const Navbar = () => {
   return (
     <NavBar>
       <Pcontainer>
-      <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P1>Stackz</P1></Link>
-  <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P2>Stackz</P2></Link>
-  <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P3>Stackz</P3></Link>
-  <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P4>Stackz</P4></Link>
-  <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P5>Stackz</P5></Link>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P1>Stackz</P1></Link>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P2>Stackz</P2></Link>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P3>Stackz</P3></Link>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P4>Stackz</P4></Link>
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}><P5>Stackz</P5></Link>
       </Pcontainer>
       <Hamburger onClick={() => setMenuOpen(!menuOpen)}>&#9776;</Hamburger>
       <Menu open={menuOpen}>
@@ -40,7 +40,7 @@ const Navbar = () => {
               <StyledLink to="/">Home</StyledLink>
               <StyledLink to="/addItems">Add Item</StyledLink>
               <StyledLink to="/profilepage">Profile</StyledLink>
-              <StyledLink to="/cart">Your Cart</StyledLink>
+              <StyledLink to="/cart">Your Cart ({cartCount})</StyledLink>
               <StyledLink onClick={handleLogout} to="#">Logout</StyledLink>
             </>
           ) : (
@@ -48,7 +48,7 @@ const Navbar = () => {
               <StyledLink to="/">Home</StyledLink>
               <StyledLink to="/login">Login</StyledLink>
               <StyledLink to="/signup">Sign Up</StyledLink>
-              <StyledLink to="/cart">Your Cart</StyledLink>
+              <StyledLink to="/cart">Your Cart ({cartCount})</StyledLink>
             </>
           )}
         </Links>

@@ -131,7 +131,7 @@ const AddItemContainer = styled.div`
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(9, 9, 9, 0.1);
 `;
 
 const Form = styled.form`

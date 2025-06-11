@@ -166,7 +166,7 @@ const Textarea = styled.textarea`
 `;
 
 const Button = styled.button`
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(5, 4, 4);
   color: #fff;
   padding: 10px;
   border: none;

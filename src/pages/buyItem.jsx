@@ -3,7 +3,7 @@
 const BuyItem = () =>{
 
 return(
-<Div>jo</Div>
+<Div>jojo</Div>
 )
 }
 
